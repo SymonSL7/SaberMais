@@ -1,5 +1,37 @@
 # Saber+
 
+🚀 Projeto Saber+ – Plataforma de Cursos Online (PUC Minas)
+
+Como parte do projeto integrador do 2º semestre do curso de Análise e Desenvolvimento de Sistemas da PUC Minas, desenvolvi com meu grupo o Saber+, uma aplicação web para gestão de cursos online, focada em facilitar o relacionamento entre alunos, instrutores e conteúdo.
+
+Com o Saber+ é possível:
+
+- Cadastrar cursos e aulas de forma estruturada
+- Matricular alunos e acompanhar o progresso de cada um
+- Registrar dúvidas e respostas entre estudantes e instrutores
+- Gerar relatórios de engajamento e progresso, apoiando a tomada de decisão
+
+O projeto foi desenvolvido em ASP.NET Core MVC (.NET 9), utilizando:
+
+- Entity Framework Core para acesso a dados
+- Autenticação e autorização com regras de dono da conta/curso
+- Views em Razor e layout responsivo com Bootstrap
+- Validações customizadas (como regra de senha complexa)
+
+🔗 Aplicação publicada para testes:
+
+http://symonsl7-001-site1.stempurl.com/
+Usuário: 11277727
+Senha: 60-dayfreetrial
+
+
+Esse projeto tem sido uma ótima oportunidade para aplicar na prática os conceitos vistos no 2º Semestre (modelagem, MVC, banco de dados, segurança e boas práticas).
+Feedbacks sobre código, arquitetura e usabilidade são muito bem-vindos!
+
+#### Obs.: Algumas imagens e vídeos presentes na documentação não estarão disponíveis nesta versão, pois o projeto original foi desenvolvido em um repositório privado da PUC Minas. Esta é apenas uma cópia do repositório original, com recursos visuais limitados.
+
+# Saber+
+
 `CURSO`
 Análise e Desenvolvimento de Sistemas
 
