@@ -1,0 +1,61 @@
+@model SaberMais.Models.SolicitarRedefinicaoSenhaViewModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Recuperar Senha";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    </head>
+<body class="d-flex flex-column min-vh-100">
+
+    <div class="d-flex align-items-center justify-content-center flex-grow-1">
+        <div class="card shadow-sm" style="width: 25rem;">
+            <div class="card-header text-center bg-white border-0 pt-4">
+                <h4 class="fw-bold">Recuperar Senha</h4>
+            </div>
+            <div class="card-body p-4">
+                
+                <p class="text-center text-muted small mb-3">
+                    Digite seu e-mail abaixo. Se ele estiver cadastrado, enviaremos um link para redefinir sua senha.
+                </p>
+
+                <form asp-action="SolicitarRedefinicaoSenha">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid gap-2 mb-3">
+                         <input type="submit" value="Enviar Link" class="btn btn-primary" />
+                         <a class="btn btn-secondary" asp-action="Login">Voltar para o Login</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted bg-white">
+        <div class="container text-center py-3">
+            &copy; @DateTime.Now.Year - Saber+ - Privacy
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+</body>
+</html>

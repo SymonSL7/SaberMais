@@ -1,0 +1,32 @@
+message: Please cite this software using these metadata.
+title: Saber+
+authors:
+  - family-names: Marcela Pinheiro Maia
+    given-names: Claudia
+  - family-names: Reis Esteves
+    given-names: Lucas
+  - family-names: Gustavo Alcântara Seabra
+    given-names: Luiz
+  - family-names: Silva Lima
+    given-names: Symon 
+  - family-names: Ricardo Feitosa Marcelino 
+    given-names: José
+  - family-names: Gonçalves Magalhães da Silva
+    given-names: Kauê 
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Jeunon de Alencar
+    given-names: Bernardo
+keywords:
+  - Aulas
+  - Videos
+  - Plataforma de Cursos
+  - Gratuita
+  - Colaborativa
+  - Aprender
+  - Ensinar
+  - Compartilhar
+repository-code: 
+version: 1.0.0
+
+date-released: 2025-12-01

@@ -1,0 +1,38 @@
+@model SaberMais.Models.Usuario
+
+@{
+    ViewData["Title"] = "Editar Perfil";
+}
+
+<div class="text-center">
+    <h1>Editar Perfil</h1>
+    <h4>Suas Informações</h4>
+</div>
+
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            
+            <div class="mb-3">
+                <label asp-for="Nome" class="form-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="Descricao" class="form-label"></label>
+                <textarea asp-for="Descricao" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            
+            <div class="mb-3">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-controller="Usuarios" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+
+@{
+    ViewData["Title"] = ViewBag.TituloErro;
+}
+
+<div class="text-center">
+    <h1 class="display-4 text-danger">@ViewBag.TituloErro</h1>
+    <p style="font-size: 1.2rem;">@ViewBag.MensagemErro</p>
+    
+    
+
+    <br /><br />
+    
+    <a asp-action="Index" asp-controller="Home" class="btn btn-primary">
+        Voltar para a Página Inicial
+    </a>
+</div>

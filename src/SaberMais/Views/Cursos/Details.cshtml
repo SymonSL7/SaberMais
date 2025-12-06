@@ -1,0 +1,122 @@
+﻿@model SaberMais.Models.Curso
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Detalhes do Curso: " + Model.Titulo;
+}
+
+@if (TempData["MensagemAviso"] != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @TempData["MensagemAviso"]
+    </div>
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-primary">
+
+        <div class="card-header bg-primary text-white">
+            <h1 class="h3 mb-0">@Html.DisplayFor(model => model.Titulo)</h1>
+        </div>
+
+        <div class="card-body">
+
+            <h4 class="card-title text-primary mb-3">Descrição Completa</h4>
+            <div class="p-3 mb-4 bg-light rounded border">
+                <p class="card-text text-break">
+                    @Html.DisplayFor(model => model.Descricao)
+                </p>
+            </div>
+
+            <h4 class="card-title text-secondary mb-3 mt-4">Detalhes do Curso</h4>
+            <dl class="row mb-0">
+                <dt class="col-sm-3">
+                    <i class="bi bi-clock"></i> @Html.DisplayNameFor(model => model.Duracao)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Duracao) Horas
+                </dd>
+
+                <dt class="col-sm-3">
+                    <i class="bi bi-info-circle"></i> @Html.DisplayNameFor(model => model.Status)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+                </dl>
+     
+                <div class="text-end pt-3">
+                <a asp-controller="Aulas" asp-action="Index" asp-route-cursoId="@Model.Id" class="btn border-secondary-subtle btn-light shadow">
+                    <i class="bi bi-collection-play"></i> Acessar Aulas
+                </a>
+            </div>
+        </div>
+
+        @{
+            string origem = Context.Request.Query["origem"].ToString();
+            string urlRetorno = "";
+
+            if (origem == "gerenciar")
+            {
+                urlRetorno = Url.Action("Gerenciar", "Cursos");
+            }
+            else if (origem == "publica")
+            {
+                urlRetorno = Url.Action("CursosDisponiveis", "Cursos");
+            }
+            else if (origem == "inscricoes")
+            {
+                urlRetorno = Url.Action("MinhasInscricoes", "Cursos");
+            }
+            else
+            {
+                urlRetorno = Url.Action("Index", "Cursos");
+            }
+            }
+
+            <div class="card-footer d-flex justify-content-between">
+
+                <a href="@urlRetorno" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </a>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+
+                @if (ViewBag.IsCreator == false)
+                {
+                    @if (ViewBag.IsEnrolled == true)
+                    {
+                        <form asp-controller="Matriculas" asp-action="CancelarInscricao" asp-route-cursoId="@Model.Id" method="post" onsubmit="return confirm('Tem certeza que deseja cancelar sua inscrição?');" class="mb-0">
+                            <button type="submit" class="btn btn-secondary">
+                                Cancelar Inscrição
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-controller="Matriculas" asp-action="Inscrever" asp-route-cursoId="@Model.Id" method="post" class="mb-0">
+                            <button type="submit" class="btn btn-success">
+                                Inscrever-se
+                            </button>
+                        </form>
+                    }
+                } 
+            }
+
+            @{
+                var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            }
+
+            @if (Model.UsuarioId.ToString() == currentUserId)
+            {
+
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
+                    <i class="bi bi-pencil"></i> Editar Curso
+                </a>
+                
+            }
+        </div>
+    </div>
+</div>

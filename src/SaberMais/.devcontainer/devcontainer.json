@@ -1,0 +1,35 @@
+{
+    "name": "C# (.NET) - SaberMais",
+    "image": "mcr.microsoft.com/devcontainers/dotnet:1-9.0",
+
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "version": "latest",
+            "enableNonRootDocker": "true",
+            "moby": "true"
+        }
+    },
+
+    // Comandos automáticos: Instala a ferramenta do EF e restaura o projeto
+    "postCreateCommand": "dotnet tool install --global dotnet-ef || true && dotnet restore",
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-dotnettools.csharp",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    },
+
+    // Portas que você pode precisar acessar
+    "forwardPorts": [5000, 5001, 1433],
+    
+    "portsAttributes": {
+        "5001": {
+            "protocol": "https"
+        }
+    },
+
+    "remoteUser": "vscode"
+}

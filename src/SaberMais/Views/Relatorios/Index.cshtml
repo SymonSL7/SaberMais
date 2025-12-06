@@ -1,0 +1,49 @@
+@{
+    var cursos = ViewBag.Cursos as List<SaberMais.Models.Curso>;
+}
+
+<h2>Relatórios</h2>
+
+<div class="row mb-4">
+    <div class="col-md-6 mb-3">
+        <div class="card shadow-sm border-primary h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-graph-up"></i> Relatório de Progresso
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Visualize o progresso dos alunos matriculados nos seus cursos, 
+                    comparando a quantidade de aulas ativas com as aulas concluídas.
+                </p>
+            </div>
+            <div class="card-footer">
+                <a asp-action="ProgressoUsuarios" class="btn btn-primary">
+                    <i class="bi bi-file-earmark-text"></i> Ver Relatório de Progresso
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <div class="card shadow-sm border-warning h-100">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                    <i class="bi bi-question-circle"></i> Perguntas sem Respostas
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    Visualize todas as perguntas que ainda não possuem respostas, 
+                    organizadas por curso e aula.
+                </p>
+            </div>
+            <div class="card-footer">
+                <a asp-action="PerguntasSemRespostas" class="btn btn-warning">
+                    <i class="bi bi-file-earmark-text"></i> Ver Perguntas sem Respostas
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+@model SaberMais.Models.Usuario
+
+@{
+    ViewData["Title"] = "Delete Conta";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">  
+        <h1>Tem certeza que deseja deletar sua conta?</h1>
+        <p class="text-muted">Esta ação não poderá ser desfeita.</p>
+
+        <form asp-action="Delete" class="mt-3"> <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Sim, deletar minha conta" class="btn btn-danger" />
+        <a asp-controller="Usuarios" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancelar</a> </form>
+
+    </div>
+</div>
+

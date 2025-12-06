@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Página Inicial";
+}
+
+<div class="container-fluid px-3 px-md-4 py-3 py-md-4">
+    <div class="text-center mb-4 mb-md-5">
+        <img src="~/assets/img/LogoSaberMais.jpg" alt="Saber+" class="img-fluid" style="max-width: 250px; width: 100%; height: auto;">
+    </div>
+
+    <div class="bg-light py-4 py-md-5 mb-4 mb-md-5">
+        <div class="container-fluid px-3 px-md-4">
+            <div class="row justify-content-center text-center">
+                <div class="col-12 col-lg-8">
+                    <h3 class="fw-bold mb-3 h4 h3-md">Pronto para começar sua jornada de aprendizado?</h3>
+                    <p class="lead text-muted mb-4 mb-md-5">
+                        Junte-se a milhares de estudantes e instrutores em nossa comunidade de aprendizado.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 justify-content-center">
+                        <a asp-controller="Usuarios" asp-action="Create" class="btn btn-primary btn-lg w-100 w-sm-auto">
+                            <i class="fas fa-user-plus me-2"></i>Cadastrar-se
+                        </a>
+                        <a asp-controller="Usuarios" asp-action="Login" class="btn btn-outline-primary btn-lg w-100 w-sm-auto">
+                            <i class="fas fa-sign-in-alt me-2"></i>Fazer Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid px-3 px-md-4">
+        <div class="row g-3 g-md-4 justify-content-center">
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-3 p-md-4">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="fas fa-graduation-cap fa-2x"></i>
+                        </div>
+                        <h5 class="card-title h6 h5-md">Cursos Gratuitos</h5>
+                        <p class="card-text text-muted small small-md">
+                            Todos os cursos são completamente gratuitos. Aprenda sem custos e expanda seus conhecimentos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-3 p-md-4">
+                        <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="fas fa-chalkboard-teacher fa-2x"></i>
+                        </div>
+                        <h5 class="card-title h6 h5-md">Instrutores Qualificados</h5>
+                        <p class="card-text text-muted small small-md">
+                            Aprenda com instrutores experientes e especialistas em suas áreas de conhecimento.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @@media (min-width: 768px) {
+        .h3-md { font-size: 1.75rem; }
+        .h5-md { font-size: 1.25rem; }
+        .small-md { font-size: 1rem; }
+    }
+</style>

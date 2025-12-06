@@ -1,0 +1,132 @@
+﻿@model X.PagedList.IPagedList<SaberMais.Models.Curso>
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "Cursos Disponiveis";
+
+
+}
+
+<h1>Cursos Disponíveis</h1>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <form method="get" action="@Url.Action("CursosDisponiveis")" id="searchForm">
+            <input type="text" id="searchInput" name="termo" value="@ViewBag.Termo" class="form-control form-control-lg" placeholder="Pesquisar por Título ou Descrição...">
+        </form>
+    </div>
+</div>
+
+<div class="row" id="cursosContainer">
+    @if (Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm border-primary">
+
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">@Html.DisplayFor(modelItem => item.Titulo)</h5>
+                    </div>
+
+                    <div class="card-body d-flex flex-column">
+                        <p class="card-text flex-grow-1">
+                            @{
+                                const int limiteCaracteres = 100;
+                                string descricaoCompleta = item.Descricao;
+                                string descricaoCurta = descricaoCompleta;
+
+                                if (descricaoCompleta != null && descricaoCompleta.Length > limiteCaracteres)
+                                {
+                                    descricaoCurta = descricaoCompleta.Substring(0, limiteCaracteres) + "...";
+                                }
+                            }
+                        <p class="card-text flex-grow-1">
+                            @descricaoCurta
+                        </p>
+
+                        <div class="mt-auto pt-2 border-top">
+                            <p class="card-subtitle text-muted mb-2">
+                                <i class="bi bi-clock"></i>
+                                Duração: @Html.DisplayFor(modelItem => item.Duracao) Horas (Aproximadamente)
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card-footer text-end">
+                        <a asp-action="Details" asp-route-id="@item.Id" asp-route-origem="publica" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-book"></i> Visualizar Curso
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-12">
+            <div class="alert alert-info text-center" role="alert">
+                @if (!string.IsNullOrEmpty(ViewBag.Termo?.ToString()))
+                {
+                    <text>Nenhum curso encontrado para o termo "@ViewBag.Termo".</text>
+                }
+                else
+                {
+                    <text>Nenhum curso disponível no momento.</text>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@if (Model.PageCount > 1)
+{
+    <div class="row mt-4">
+        <div class="col-12 d-flex justify-content-center">
+            @Html.PagedListPager(Model, page => Url.Action("CursosDisponiveis", new { page, termo = ViewBag.Termo }), 
+                
+                new X.PagedList.Mvc.Core.PagedListRenderOptions
+                {
+                    LiElementClasses = new[] { "page-item" },
+                    PageClasses = new[] { "page-link" },
+                    DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                    
+                    DisplayLinkToFirstPage = X.PagedList.Mvc.Core.PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = X.PagedList.Mvc.Core.PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = X.PagedList.Mvc.Core.PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = X.PagedList.Mvc.Core.PagedListDisplayMode.Always,
+                    
+                    ContainerDivClasses = new[] { "pagination-container" }
+                })
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script>
+        const input = document.getElementById("searchInput");
+        const searchForm = document.getElementById("searchForm");
+        let timeout = null;
+
+
+        input.addEventListener("keyup", () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                searchForm.submit();
+            }, 300);
+        });
+
+
+        input.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                clearTimeout(timeout);
+                searchForm.submit();
+            }
+        });
+    </script>
+}

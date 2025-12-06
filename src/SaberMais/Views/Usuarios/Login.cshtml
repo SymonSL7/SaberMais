@@ -1,0 +1,106 @@
+@model SaberMais.Models.Usuario
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        .alert-link {
+            word-break: break-all;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <div class="container-fluid px-3 px-md-4 py-3">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @* Html.Raw() é ESSENCIAL aqui. 
+                Ele renderiza o HTML que você criou no controller 
+                (o <br> e o link <a>). 
+                Sem ele, o usuário veria o texto HTML puro.
+                *@
+                <div class="alert-link">
+                    @Html.Raw(TempData["SuccessMessage"])
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert-link">
+                    @Html.Raw(TempData["ErrorMessage"])
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center flex-grow-1 px-3 py-4">
+        <div class="card shadow-sm w-100" style="max-width: 25rem;">
+            <div class="card-header text-center bg-white border-0 pt-4">
+                <h4 class="fw-bold h5 h4-md">Login Saber+</h4>
+            </div>
+            <div class="card-body p-3 p-md-4">
+                <form asp-action="Login">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Senha" class="form-label"></label>
+                        <input asp-for="Senha" class="form-control" />
+                    </div>
+
+                    <div class="d-grid gap-2 mb-3">
+                         <input type="submit" value="Entrar" class="btn btn-primary" />
+                         <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Voltar</a>
+                    </div>
+
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-danger text-center mt-3" role="alert">
+                            @ViewBag.Message
+                        </div>
+                    }
+                    
+                    <div class="text-center small">
+                        <a asp-controller="Usuarios" asp-action="SolicitarRedefinicaoSenha">Esqueceu a senha?</a>
+                        <hr class="my-2"/>
+                        <a asp-controller="Usuarios" asp-action="Create">
+                            Ainda não possui uma conta? Cadastre-se!
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted bg-white mt-auto">
+        <div class="container-fluid text-center py-3 px-3">
+            &copy; @DateTime.Now.Year - Saber+ - Privacy
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

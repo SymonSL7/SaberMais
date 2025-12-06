@@ -1,0 +1,110 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Saber+</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="d-flex flex-grow-1" id="wrapper">
+            <div class="border-end bg-white d-flex flex-column" id="sidebar-wrapper">
+                <div>
+                    <div class="sidebar-heading border-bottom">
+                        <a class="text-dark text-decoration-none fw-bold" asp-controller="Cursos" asp-action="Index">
+                            <i class="fas fa-graduation-cap me-2"></i>Saber+
+                        </a>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" asp-controller="Cursos" asp-action="Index">
+                            <i class="fa-solid fa-house"></i> Início
+                        </a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" asp-controller="Cursos" asp-action="CursosDisponiveis">
+                            <i class="fas fa-book me-1"></i> Cursos
+                        </a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" asp-controller="Cursos" asp-action="MinhasInscricoes">
+                            <i class="fas fa-user-graduate me-1"></i> Minhas Inscrições
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-auto">
+                    @if (User.IsInRole("Instrutor"))
+                    {
+                        <div class="list-group list-group-flush">
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3" asp-controller="Cursos" asp-action="Create">
+                                <i class="fas fa-plus me-1"></i> Criar Curso
+                            </a>
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3" asp-controller="Cursos" asp-action="Gerenciar">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> Gerenciar Cursos
+                            </a>
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3" asp-controller="Relatorios" asp-action="Index">
+                                <i class="fas fa-chart-line me-1"></i> Relatórios
+                            </a>
+                        </div>
+                    }
+                    <div class="dropdown p-3 border-top">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-2"></i>
+                            <strong>@User.Identity.Name?.Split(" ")[0]</strong>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
+                            <li><a class="dropdown-item" asp-controller="Usuarios" asp-action="Details" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)?.Value">Meu Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form asp-controller="Usuarios" asp-action="Logout" method="post">
+                                    <button type="submit" class="dropdown-item">Sair</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-content-wrapper" class="d-flex flex-column">
+                <div class="p-3">
+                    <button class="btn btn-primary" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                </div>
+
+                <main class="container-fluid flex-grow-1">
+                    @RenderBody()
+                </main>
+                
+                <footer class="border-top footer text-muted bg-white mt-4">
+                    <div class="container text-center py-3">
+                        &copy; @DateTime.Now.Year - Saber+ - Privacy
+                    </div>
+                </footer>
+            </div>
+        </div>
+    }
+    else
+    {
+        <main role="main" class="pb-3 flex-grow-1">
+            @RenderBody()
+        </main>
+        
+        <footer class="border-top footer text-muted bg-white">
+            <div class="container text-center py-3">
+                &copy; @DateTime.Now.Year - Saber+ - Privacy
+            </div>
+        </footer>
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
